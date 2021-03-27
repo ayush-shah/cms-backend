@@ -3,13 +3,36 @@ const router = express.Router()
 const productModel = require('../Model/product');
 
 router.get('/', async (req, res) => {
-    const allProducts = await productModel.find().limit(50)
-    res.json(allProducts)
+    try {
+        const allProducts = await productModel.find()
+        res.json(allProducts)
+    }
+    catch (err) {
+        res.json({ message: `Error: ${err}`, path: req.url })
+    }
 })
 
-router.get('/skip=:skip', async (req, res) => {
-    const allProducts = await productModel.find().limit(50).skip(parseInt(req.params.skip))
-    res.json(allProducts)
+router.get('/:id', async (req, res) => {
+    try {
+        const allProducts = await productModel.findById(req.params.id)
+        res.json(allProducts)
+    }
+    catch (err) {
+        res.json({ message: `Error: ${err}`, path: req.url })
+    }
+})
+
+
+router.get('/limit=:limit?&skip=:skip?', async (req, res) => {
+    try {
+        const allProducts =
+            req.params.limit && req.params.skip ?
+                await productModel.find().limit(parseInt(req.params.limit)).skip(parseInt(req.params.skip)) :
+                await productModel.find()
+        res.json(allProducts)
+    } catch (err) {
+        res.json({ message: `Error: ${err}`, path: req.url })
+    }
 })
 
 router.post('/insert', async (req, res) => {

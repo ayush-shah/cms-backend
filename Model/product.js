@@ -20,6 +20,10 @@ const productSchema = mongoose.Schema({
     imageLink: {
         type: String,
         required: true
+    },
+    categories: {
+        type: String,
+        required: true
     }
 })
-module.exports = mongoose.model('products',productSchema)
+module.exports = mongoose.model('products', productSchema)

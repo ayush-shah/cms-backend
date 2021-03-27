@@ -1,0 +1,16 @@
+{
+  "name": "cms",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "start": "nodemon ./Backend/main.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "mongoose": "^5.12.2"
+  },
+  "devDependencies": {}
+}
